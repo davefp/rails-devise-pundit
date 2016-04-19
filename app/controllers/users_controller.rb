@@ -14,11 +14,19 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    puts secure_params
     authorize @user
-    if @user.update_attributes(secure_params)
-      redirect_to users_path, :notice => "User updated."
+    if params[:user][:new_label]
+      @user.labels << Label.find(params[:user].delete(:new_label))
+    end
+    if !params[:user].empty?
+      if @user.update_attributes(secure_params)
+        redirect_to users_path, :notice => "User updated."
+      else
+        redirect_to users_path, :alert => "Unable to update user."
+      end
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      redirect_to users_path, :notice => "User updated."
     end
   end
 

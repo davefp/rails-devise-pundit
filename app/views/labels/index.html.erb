@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <h3>New Label</h3>
+    <%= form_for @new_label do |f| %>
+      <% if @new_label.errors.any? %>
+        <ul>
+          <% @new_label.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="form-group">
+        <label for="label_name">Name</label>
+        <%= f.text_field :name, class: "form-control" %>
+        <label for="label_colour">Colour</label>
+        <%= f.text_field :colour, class: "form-control" %>
+      </div>
+      <%= f.submit "Create", class: "btn btn-default" %>
+    <% end %>
+  </div>
+  <div class="row">
+    <h3>labels</h3>
+    <div class="column">
+      <table class="table">
+        <tbody>
+          <% @labels.each do |label| %>
+            <tr>
+              <%= render label %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

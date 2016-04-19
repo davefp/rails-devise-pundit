@@ -1,0 +1,6 @@
+<td>
+  <%= render partial: "shared/label", object: label %>
+</td>
+<td>
+  <%= link_to("Delete label", label_path(label), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') %>
+</td>
