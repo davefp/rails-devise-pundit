@@ -15,4 +15,12 @@ describe Label do
     expect(Label.new(name: "test", colour: '#000000')).to be_invalid
   end
 
+  it "must have a colour in hex form" do
+    expect(build(:label, colour: '#00FF00')).to be_valid
+    expect(build(:label, colour: '#QWERTY')).to be_invalid
+    expect(build(:label, colour: '000000')).to be_invalid
+    expect(build(:label, colour: '#1234567')).to be_invalid
+    expect(build(:label, colour: nil)).to be_invalid
+  end
+
 end
