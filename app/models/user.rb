@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :labels
+  has_many :labels_users
+  has_many :labels, through: :labels_users
 
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?

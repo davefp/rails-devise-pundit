@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @new_labels_user = LabelsUser.new
     authorize User
   end
 
@@ -16,17 +17,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     puts secure_params
     authorize @user
-    if params[:user][:new_label]
-      @user.labels << Label.find(params[:user].delete(:new_label))
-    end
-    if !params[:user].empty?
-      if @user.update_attributes(secure_params)
-        redirect_to users_path, :notice => "User updated."
-      else
-        redirect_to users_path, :alert => "Unable to update user."
-      end
-    else
+    if @user.update_attributes(secure_params)
       redirect_to users_path, :notice => "User updated."
+    else
+      redirect_to users_path, :alert => "Unable to update user."
     end
   end
 

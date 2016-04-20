@@ -9,8 +9,9 @@
       <%= render partial: "shared/label", object: label %>
     <% end %>
   <% end %>
-  <%= form_for(user) do |f| %>
-    <%= collection_select :user, :new_label, available_labels(user), :id, :name %>
+  <%= form_for(@new_labels_user) do |f| %>
+    <%= f.hidden_field :user_id, value: user.id %>
+    <%= f.collection_select :label_id, available_labels(user), :id, :name %>
     <%= f.submit 'Add label', class: 'btn btn-default' %>
   <% end %>
 </td>
